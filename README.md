@@ -1,35 +1,45 @@
-CX CLOUD GO ASSIGNMENT
-===
+# CX CLOUD - GoLang - Movie Rating Lookup
 
-Use OMDB API to check Rotten Tomatoes Ratings of user-supplied movies
+This service utilizes http://www.omdbapi.com/ to check the Rotten Tomatoes Rating associated with a given Movie Title.
 
-+ OMDB API apiKey stored at ./go/.apiKeyStore
-+ Dockerfile stored at ./go/Dockerfile
-+ GoLang application file stored at ./go/movierating.go
-+ Executable file stored at ./go/movierating.exe
++ Dockerfile stored at ./Dockerfile
++ GoLang application file stored at ./movieLookup.go
++ Executable file stored at ./getMovie
 
-RUN
----
+## Before Use:
+
+1) Go to http://www.omdbapi.com/apikey.aspx in order to sign up for the service and acquire an API key.
+2) Make sure you **set and export** a 'omdbApiKey' environment variable before running via CLI.
+3) You **must** also pass the 'omdbApiKey' environment variable to the docker container when running the docker container.
+
+## To Run:
+
+## CLI:
 ```
-$ go build ./go/movierating.go
-$ ./movierating.exe <"title">
+$ export omdbApiKey='<your api key>'
+$ go build -o getMovie ./movieLookup.go
+$ ./getMovie "<Movie Title>"
 ```
 
-Example
----
-
-```
-.\go\movierating.exe "The Dark Knight"
-```
-
----
-Expected Output:
+#### Example
 
 ```
-Starting execution
-------------------
-Searching for movie: The Dark Knight
-------------------
-Movie Rating Source: Rotten Tomatoes
-Movie Rating: 94%
+$ ./getMovie "The Dark Knight"
+94%
+```
+
+## Docker:
+```
+$ export omdbApiKey='<your api key>'
+$ docker build -t <image_name> .
+$ docker run -eomdbApiKey=$omdbApiKey "<Movie Title>"
+```
+
+#### Example
+
+```
+$ docker build -t movielookup:1.0 .
+
+$ docker run -eomdbApiKey=$omdbApiKey movielookup:1.0 "The Dark Knight"
+94%
 ```
