@@ -18,7 +18,7 @@ FROM alpine
 # set work directory to execute code from
 WORKDIR /bin
 
-# copy the compiled go code at '/src/getMac' to
+# copy the compiled go code to
 # work directory '/bin'
 COPY --from=build /src/getMovie /bin
 
