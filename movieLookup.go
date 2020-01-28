@@ -100,7 +100,7 @@ func getMovieRating(body string) {
 
 		if IsValidSource(movieObj.Ratings[i].Source) {
       // fmt.Printf("Movie Rating Source: %s\n", movieObj.Ratings[i].Source)
-      fmt.Printf("%s", movieObj.Ratings[i].Value)
+      fmt.Printf("%s\n", movieObj.Ratings[i].Value)
 			// fmt.Printf("Movie Rating: %s\n", movieObj.Ratings[i].Value)
 		}
 	}
