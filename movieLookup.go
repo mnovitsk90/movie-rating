@@ -8,6 +8,7 @@ import (
   "net/url"
   "net/http"
   "encoding/json"
+  "flag"
 )
 
 //Define Movie Data structure for HTTP GET return
@@ -24,18 +25,31 @@ type Ratings struct {
 // json data type
 var movieObj Movie
 
-func getMovieTitle() string {
+var inputMovie string
 
-  inputMovie := "Boondock Saints"
+func init() {
+  const (
+    defaultMovie = ""
+    usage = "Title of movie to lookup"
+  )
+  flag.StringVar(&inputMovie, "title", defaultMovie, usage)
+  flag.StringVar(&inputMovie, "t", defaultMovie, usage)
 
-  if len(os.Args) > 1 {
-    inputMovie = os.Args[1]
-  } else {
-    inputMovie = "Boondock Saints"
-  }
-
-  return inputMovie
+  flag.Parse()
 }
+
+// func getMovieTitle() string {
+
+//   inputMovie := "Boondock Saints"
+
+//   if len(os.Args) > 1 {
+//     inputMovie = os.Args[1]
+//   } else {
+//     inputMovie = "Boondock Saints"
+//   }
+
+//   return inputMovie
+// }
 
 func buildUrl(movieTitle string, apiKey string) string {
 
@@ -112,9 +126,11 @@ func main() {
   // fmt.Println("Starting execution")
   // fmt.Println("------------------")
 
+  fmt.Printf("%s\n", inputMovie)
   apiKey := getApiKey()
-  movieTitle := getMovieTitle()
-  queryUrl := buildUrl(movieTitle, apiKey)
+  // movieTitle := getMovieTitle()
+  // queryUrl := buildUrl(movieTitle, apiKey)
+  queryUrl := buildUrl(inputMovie, apiKey)
   
   // fmt.Printf("Searching for movie: %s\n", movieTitle)
   // fmt.Println("------------------")

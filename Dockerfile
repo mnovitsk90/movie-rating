@@ -24,3 +24,4 @@ COPY --from=build /src/getMovie /bin
 
 # set location for docker container to begin executing
 ENTRYPOINT ["./getMovie"]
+CMD ["-h"]

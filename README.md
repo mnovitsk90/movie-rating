@@ -18,13 +18,16 @@ This service utilizes http://www.omdbapi.com/ to check the Rotten Tomatoes Ratin
 ```
 $ export omdbApiKey='<your api key>'
 $ go build -o getMovie ./movieLookup.go
-$ ./getMovie "<Movie Title>"
+$ ./getMovie [-t|--title] "<Movie Title>"
 ```
 
 #### Example
 
 ```
-$ ./getMovie "The Dark Knight"
+$ ./getMovie -t "The Dark Knight"
+94%
+
+$ ./getMovie --title "The Dark Knight"
 94%
 ```
 
@@ -32,7 +35,7 @@ $ ./getMovie "The Dark Knight"
 ```
 $ export omdbApiKey='<your api key>'
 $ docker build -t <image_name> .
-$ docker run -eomdbApiKey=$omdbApiKey "<Movie Title>"
+$ docker run -e omdbApiKey=$omdbApiKey [-t|--title] "<Movie Title>"
 ```
 
 #### Example
@@ -40,6 +43,9 @@ $ docker run -eomdbApiKey=$omdbApiKey "<Movie Title>"
 ```
 $ docker build -t movielookup:1.0 .
 
-$ docker run -eomdbApiKey=$omdbApiKey movielookup:1.0 "The Dark Knight"
+$ docker run -e omdbApiKey=$omdbApiKey movielookup:1.0 -t "The Dark Knight"
+94%
+
+$ docker run -e omdbApiKey=$omdbApiKey movielookup:1.0 --title "The Dark Knight"
 94%
 ```
